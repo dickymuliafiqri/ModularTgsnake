@@ -1,0 +1,17 @@
+{
+  "name": "modulartgsnake",
+  "version": "0.0.1",
+  "description": "Template for modular telegram bot based on tgsnake",
+  "main": "app/index.js",
+  "scripts": {
+    "start": "npx tsc && node app/index.js"
+  },
+  "author": "dickymuliafiqri",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^17.0.38",
+    "ping": "^0.4.2",
+    "tgsnake": "^2.0.0-beta.21",
+    "typescript": "^4.7.2"
+  }
+}

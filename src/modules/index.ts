@@ -10,31 +10,25 @@ import { readdirSync } from "fs";
 export const loadModules = async () => {
   const moduleList: Array<string> = readdirSync(__dirname);
 
-  const modulesLoaded: Array<string> = await new Promise((resolve) => {
-    let modulesLoaded: Array<string> = [];
+  const loadedModules: Array<string> = await new Promise((resolve) => {
+    let modules: Array<string> = [];
     moduleList.forEach(async (moduleName) => {
       if (/\.js$/i.exec(moduleName)) {
         if (moduleName === "index.js") return;
 
         await import(`./${moduleName}`)
           .then(() => {
-            if (!(modulesLoaded.length % 3)) modulesLoaded.push(`\n${moduleName}`);
-            else modulesLoaded.push(moduleName);
+            if (!(modules.length % 3)) modules.push(`\n${moduleName}`);
+            else modules.push(moduleName);
           })
           .catch((err) => {
             console.error(`Failed to load module ${moduleName}\n`, err);
             process.exit(1);
           });
-        resolve(modulesLoaded);
+        resolve(modules);
       }
     });
   });
 
-  console.log(`🔌 Modules loaded: ${modulesLoaded.length}${modulesLoaded.join(" | ")}`);
+  console.log(`🔌 Loaded modules: ${loadedModules.length}${loadedModules.join(" | ")}`);
 };
-
-/**
- * TODO
- *
- * - Create and list "help"
- */

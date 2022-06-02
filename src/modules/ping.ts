@@ -5,6 +5,7 @@
  */
 
 import { composer, bot } from "..";
+import { helpList } from "../helper/help";
 const ping = require("ping");
 
 composer.cmd("ping", async (ctx) => {
@@ -18,4 +19,9 @@ composer.cmd("ping", async (ctx) => {
       ctx.reply(pongMsg);
     }
   });
+});
+
+helpList.push({
+  command: "/ping",
+  desc: "Check bot response time",
 });

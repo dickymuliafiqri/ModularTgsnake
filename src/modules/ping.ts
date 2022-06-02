@@ -8,13 +8,14 @@ import { composer, bot } from "..";
 const ping = require("ping");
 
 composer.cmd("ping", async (ctx) => {
-  ctx.reply(`Wait...`).then(async (res) => {
+  ctx.reply(`⚾`).then(async (res) => {
     const msgId = res?.message.id;
-    let pingRes = await ping.promise.probe("google.com");
+    const pingRes = await ping.promise.probe("google.com");
+    const pongMsg = `Pong 🏓\n${pingRes.time} ms`;
     if (msgId) {
-      bot.telegram.editMessage(ctx.chat.id, res?.message.id, `Pong 🏓\n${pingRes.time} ms`);
+      bot.telegram.editMessage(ctx.chat.id, msgId, pongMsg);
     } else {
-      ctx.reply(`Pong 🏓\n${pingRes.time} ms`);
+      ctx.reply(pongMsg);
     }
   });
 });
